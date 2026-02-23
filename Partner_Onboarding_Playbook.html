@@ -1,0 +1,1967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partner onboarding playbook | Collinson</title>
+<style>
+  :root {
+    --magenta: #C81052;
+    --blue: #003366;
+    --teal: #00968F;
+    --grey: #58595B;
+    --light-grey: #F5F5F5;
+    --mid-grey: #E0E0E0;
+    --white: #FFFFFF;
+    --soft-magenta: #FDF0F4;
+    --soft-blue: #EDF2F7;
+    --soft-teal: #EBF8F7;
+    --soft-yellow: #FFF9E6;
+    --text: #2D2D2D;
+    --border: #D1D5DB;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text);
+    line-height: 1.6;
+    background: var(--white);
+    font-size: 15px;
+  }
+
+  /* HEADER */
+  .site-header {
+    background: var(--blue);
+    color: var(--white);
+    padding: 28px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .site-header h1 {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+  .site-header .subtitle {
+    font-size: 13px;
+    opacity: 0.8;
+    margin-top: 2px;
+  }
+
+  /* LAYOUT */
+  .layout {
+    display: flex;
+    min-height: calc(100vh - 80px);
+  }
+
+  /* SIDEBAR NAV */
+  .sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: var(--light-grey);
+    border-right: 1px solid var(--mid-grey);
+    padding: 24px 0;
+    position: sticky;
+    top: 80px;
+    height: calc(100vh - 80px);
+    overflow-y: auto;
+    font-size: 13.5px;
+  }
+  .sidebar .nav-section {
+    padding: 0 20px;
+    margin-bottom: 20px;
+  }
+  .sidebar .nav-section-title {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--grey);
+    font-weight: 700;
+    margin-bottom: 8px;
+    padding-left: 4px;
+  }
+  .sidebar a {
+    display: block;
+    padding: 6px 12px;
+    color: var(--text);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.15s;
+    margin-bottom: 1px;
+  }
+  .sidebar a:hover {
+    background: var(--mid-grey);
+    color: var(--blue);
+  }
+  .sidebar a.stage-link {
+    font-weight: 600;
+    color: var(--blue);
+  }
+  .sidebar a.sub-link {
+    padding-left: 24px;
+    font-size: 12.5px;
+    color: var(--grey);
+  }
+
+  /* MAIN CONTENT */
+  .main {
+    flex: 1;
+    max-width: 960px;
+    padding: 40px 48px 80px;
+  }
+
+  /* TYPOGRAPHY */
+  h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--blue);
+    margin: 48px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--teal);
+  }
+  h2:first-of-type { margin-top: 0; }
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--blue);
+    margin: 32px 0 12px;
+  }
+  h4 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--grey);
+    margin: 24px 0 8px;
+  }
+  p { margin-bottom: 12px; }
+  ul, ol { margin: 8px 0 16px 24px; }
+  li { margin-bottom: 6px; }
+
+  /* STAGE BANNER */
+  .stage-banner {
+    background: var(--blue);
+    color: var(--white);
+    padding: 20px 24px;
+    border-radius: 8px;
+    margin: 32px 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .stage-banner .stage-number {
+    background: var(--teal);
+    color: var(--white);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .stage-banner .stage-info h2 {
+    color: var(--white);
+    margin: 0;
+    padding: 0;
+    border: none;
+    font-size: 20px;
+  }
+  .stage-banner .stage-info p {
+    margin: 4px 0 0;
+    opacity: 0.85;
+    font-size: 14px;
+  }
+
+  /* META BOX */
+  .meta-box {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .meta-item {
+    background: var(--soft-blue);
+    padding: 14px 16px;
+    border-radius: 6px;
+    border-left: 3px solid var(--blue);
+  }
+  .meta-item .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--grey);
+    font-weight: 600;
+  }
+  .meta-item .value {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--blue);
+    margin-top: 2px;
+  }
+
+  /* PATH TABS */
+  .path-tabs {
+    display: flex;
+    gap: 0;
+    margin: 24px 0 0;
+    border-bottom: 2px solid var(--mid-grey);
+  }
+  .path-tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    background: none;
+    color: var(--grey);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.15s;
+  }
+  .path-tab:hover { color: var(--blue); }
+  .path-tab.active {
+    color: var(--blue);
+    border-bottom-color: var(--teal);
+  }
+  .path-tab.active.prebook {
+    color: var(--magenta);
+    border-bottom-color: var(--magenta);
+  }
+  .path-content { display: none; padding-top: 20px; }
+  .path-content.active { display: block; }
+
+  /* CALLOUT BOXES */
+  .callout {
+    padding: 16px 20px;
+    border-radius: 6px;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+  .callout-teal {
+    background: var(--soft-teal);
+    border-left: 3px solid var(--teal);
+  }
+  .callout-magenta {
+    background: var(--soft-magenta);
+    border-left: 3px solid var(--magenta);
+  }
+  .callout-blue {
+    background: var(--soft-blue);
+    border-left: 3px solid var(--blue);
+  }
+  .callout-warn {
+    background: var(--soft-yellow);
+    border-left: 3px solid #D4A017;
+  }
+  .callout-red {
+    background: #FDF0F0;
+    border-left: 3px solid #C0392B;
+  }
+  .callout .callout-title {
+    font-weight: 700;
+    margin-bottom: 4px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* TABLES */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 13.5px;
+  }
+  th {
+    background: var(--blue);
+    color: var(--white);
+    text-align: left;
+    padding: 10px 14px;
+    font-weight: 600;
+    font-size: 12.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--mid-grey);
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: var(--light-grey); }
+
+  /* CHECKLIST */
+  .checklist {
+    background: var(--light-grey);
+    border: 1px solid var(--mid-grey);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 20px 0;
+  }
+  .checklist h4 {
+    margin: 0 0 12px;
+    color: var(--blue);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 6px 0;
+    font-size: 14px;
+  }
+  .checklist-item .box {
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--teal);
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* COLLAPSIBLE */
+  .collapsible {
+    margin: 12px 0;
+  }
+  .collapsible-trigger {
+    background: var(--light-grey);
+    border: 1px solid var(--mid-grey);
+    border-radius: 6px;
+    padding: 12px 16px;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--blue);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.15s;
+  }
+  .collapsible-trigger:hover { background: var(--mid-grey); }
+  .collapsible-trigger .arrow {
+    transition: transform 0.2s;
+    font-size: 12px;
+  }
+  .collapsible-trigger.open .arrow { transform: rotate(90deg); }
+  .collapsible-body {
+    display: none;
+    padding: 16px 20px;
+    border: 1px solid var(--mid-grey);
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+  }
+  .collapsible-body.open { display: block; }
+
+  /* PROCESS FLOW */
+  .process-flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 24px 0;
+    flex-wrap: wrap;
+  }
+  .process-step {
+    background: var(--soft-blue);
+    border: 1px solid var(--blue);
+    border-radius: 8px;
+    padding: 12px 16px;
+    text-align: center;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--blue);
+    min-width: 120px;
+    position: relative;
+  }
+  .process-step.active-step {
+    background: var(--blue);
+    color: var(--white);
+  }
+  .process-arrow {
+    color: var(--teal);
+    font-size: 20px;
+    padding: 0 4px;
+    flex-shrink: 0;
+  }
+
+  /* VENDOR CODE FLOW */
+  .vendor-flow {
+    margin: 20px 0;
+    border: 1px solid var(--mid-grey);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .vendor-lane {
+    padding: 16px 20px;
+  }
+  .vendor-lane.partnerships {
+    background: var(--soft-yellow);
+    border-bottom: 2px solid var(--mid-grey);
+  }
+  .vendor-lane.masterdata {
+    background: var(--soft-blue);
+  }
+  .vendor-lane .lane-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    color: var(--grey);
+    margin-bottom: 10px;
+  }
+  .vendor-steps {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .vendor-step {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 12px;
+    text-align: center;
+    min-width: 100px;
+    max-width: 160px;
+  }
+  .vendor-step.decision {
+    background: #FFF9E6;
+    border-color: #D4A017;
+    transform: rotate(0deg);
+  }
+  .vendor-arrow {
+    color: var(--grey);
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  /* TBC TAG */
+  .tbc {
+    background: #FFF3CD;
+    color: #856404;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* ROLE TAG */
+  .role {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .role-pm { background: var(--soft-blue); color: var(--blue); }
+  .role-ops { background: var(--soft-teal); color: #006B66; }
+  .role-finance { background: var(--soft-yellow); color: #856404; }
+  .role-legal { background: #F0E6F6; color: #6B2D8B; }
+  .role-product { background: var(--soft-magenta); color: var(--magenta); }
+
+  /* TIMELINE */
+  .timeline {
+    margin: 20px 0;
+    border-left: 3px solid var(--teal);
+    padding-left: 24px;
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -30px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--teal);
+  }
+  .timeline-item .time-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--teal);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .timeline-item .time-content {
+    font-size: 14px;
+    margin-top: 4px;
+  }
+
+  /* GATE */
+  .gate {
+    background: linear-gradient(135deg, var(--blue) 0%, #004080 100%);
+    color: var(--white);
+    border-radius: 8px;
+    padding: 24px;
+    margin: 28px 0;
+  }
+  .gate h3 {
+    color: var(--white);
+    margin: 0 0 4px;
+    font-size: 16px;
+  }
+  .gate .gate-owner {
+    font-size: 13px;
+    opacity: 0.8;
+    margin-bottom: 16px;
+  }
+  .gate .checklist-item { color: var(--white); }
+  .gate .checklist-item .box { border-color: var(--teal); }
+
+  /* NEVER APPROVED */
+  .never-approved {
+    background: #2D2D2D;
+    color: var(--white);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 20px 0;
+  }
+  .never-approved h4 {
+    color: #E74C3C;
+    margin: 0 0 12px;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+  .never-approved li {
+    color: #DDD;
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+
+  /* PRINT */
+  @media print {
+    .sidebar { display: none; }
+    .site-header { position: static; }
+    .main { max-width: 100%; padding: 20px; }
+    .collapsible-body { display: block !important; }
+    .path-content { display: block !important; }
+    .path-tabs { display: none; }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .sidebar { display: none; }
+    .main { padding: 24px 20px; }
+  }
+
+  /* VERSION BADGE */
+  .version-badge {
+    display: inline-block;
+    background: var(--teal);
+    color: var(--white);
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+
+  /* HEADER META ROW */
+  .header-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 6px;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <h1>Partner onboarding playbook</h1>
+  <div class="header-meta">
+    <span class="subtitle">From contract to activation | Stages 5, 6 and 7</span>
+    <span class="version-badge">V1.0 | February 2026</span>
+  </div>
+</header>
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="nav-section">
+    <div class="nav-section-title">Start here</div>
+    <a href="#how-to-use">How to use this playbook</a>
+    <a href="#quick-reference">Quick reference</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Stage 5</div>
+    <a href="#stage5" class="stage-link">Contracting and documentation</a>
+    <a href="#s5-activities" class="sub-link">Activities</a>
+    <a href="#s5-critical-info" class="sub-link">Critical information</a>
+    <a href="#s5-prebook" class="sub-link">Pre-book path</a>
+    <a href="#s5-gate" class="sub-link">Stage gate</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Stage 6</div>
+    <a href="#stage6" class="stage-link">Onboarding</a>
+    <a href="#s6-phase1" class="sub-link">Phase 1: Enablement</a>
+    <a href="#s6-vendor-code" class="sub-link">Vendor code setup</a>
+    <a href="#s6-phase2" class="sub-link">Phase 2: Activation prep</a>
+    <a href="#s6-prebook" class="sub-link">Pre-book path</a>
+    <a href="#s6-gate" class="sub-link">Stage gate</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Stage 7</div>
+    <a href="#stage7" class="stage-link">Activation</a>
+    <a href="#s7-milestones" class="sub-link">Weekly milestones</a>
+    <a href="#s7-prebook" class="sub-link">Pre-book path</a>
+    <a href="#s7-gate" class="sub-link">Stage gate</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Reference</div>
+    <a href="#exception-governance">Exception governance</a>
+    <a href="#decision-rights">Decision rights</a>
+    <a href="#salesforce">Salesforce tracking</a>
+    <a href="#prebook-variants">Pre-book variants guide</a>
+    <a href="#schedule-changes">Schedule changes (post-launch)</a>
+    <a href="#contacts">Key contacts</a>
+    <a href="#placeholders">Open items [TBC]</a>
+  </div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main class="main">
+
+<!-- HOW TO USE -->
+<section id="how-to-use">
+<h2>How to use this playbook</h2>
+<p>This playbook covers the complete journey from contract signature to a partner processing their first transactions and passing the 30-day health check. It is written for partnership managers. Partner operations, finance, and product teams will also use it as a reference for their responsibilities and handoff points.</p>
+
+<p>Each stage shows two paths: the <strong>standard path</strong> (every partner) and the <strong>pre-book path</strong> (additional steps when the partner is offering pre-book with pre-agreed availability). Use the tabs at each stage to switch between them.</p>
+
+<div class="callout callout-teal">
+  <div class="callout-title">Reading order</div>
+  If you are onboarding a partner for the first time, read the full playbook once from top to bottom. After that, use the sidebar navigation to jump to the stage you need.
+</div>
+
+<div class="callout callout-warn">
+  <div class="callout-title">Items marked <span class="tbc">TBC</span></div>
+  Some items in this playbook are pending final input. They are tagged with a yellow TBC label. These do not block you from using the playbook. A full list of open items is in the <a href="#placeholders">Open items</a> section.
+</div>
+</section>
+
+<!-- QUICK REFERENCE -->
+<section id="quick-reference">
+<h2>Quick reference</h2>
+
+<div class="process-flow">
+  <div class="process-step active-step">Stage 5<br><small>Contracting</small></div>
+  <span class="process-arrow">&#9654;</span>
+  <div class="process-step active-step">Stage 6<br><small>Onboarding</small></div>
+  <span class="process-arrow">&#9654;</span>
+  <div class="process-step active-step">Stage 7<br><small>Activation</small></div>
+  <span class="process-arrow">&#9654;</span>
+  <div class="process-step">Growth<br><small>Ongoing QBRs</small></div>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Stage</th>
+      <th>Owner</th>
+      <th>Duration</th>
+      <th>Key output</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>5. Contracting</strong></td>
+      <td><span class="role role-pm">Partnerships</span> + <span class="role role-legal">Legal</span></td>
+      <td>2 to 4 weeks</td>
+      <td>Executed contract, complete LIF, Salesforce case created</td>
+    </tr>
+    <tr>
+      <td><strong>6. Onboarding</strong></td>
+      <td><span class="role role-ops">Partner Ops</span> + <span class="role role-finance">Finance</span></td>
+      <td>21 business days</td>
+      <td>Systems live, partner trained, finance setup complete</td>
+    </tr>
+    <tr>
+      <td><strong>7. Activation</strong></td>
+      <td><span class="role role-ops">Partner Ops</span> then <span class="role role-pm">Partnerships</span></td>
+      <td>30 days</td>
+      <td>Health check passed, transition to QBR rhythm</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout callout-blue">
+  <div class="callout-title">Pre-book timeline</div>
+  When pre-book is in scope, add approximately 4 weeks for pre-book configuration and testing. This runs alongside standard onboarding. The pre-book clock starts when Product confirms the work is in sprint, not from your handoff date. Total with pre-book: approximately 4 to 5 weeks from complete handoff.
+</div>
+</section>
+
+<!-- ================================================================ -->
+<!-- STAGE 5 -->
+<!-- ================================================================ -->
+<section id="stage5">
+<div class="stage-banner">
+  <div class="stage-number">5</div>
+  <div class="stage-info">
+    <h2>Contracting and documentation</h2>
+    <p>Pre-onboarding gate. Everything here must be done before onboarding starts.</p>
+  </div>
+</div>
+
+<div class="meta-box">
+  <div class="meta-item">
+    <div class="label">Owner</div>
+    <div class="value">Regional Partnerships + Legal</div>
+  </div>
+  <div class="meta-item">
+    <div class="label">Duration</div>
+    <div class="value">2 to 4 weeks</div>
+  </div>
+  <div class="meta-item">
+    <div class="label">Trigger</div>
+    <div class="value">Stage 4 negotiation complete</div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="path-tabs" data-group="s5">
+  <button class="path-tab active" onclick="switchTab('s5','standard')">Standard path</button>
+  <button class="path-tab prebook" onclick="switchTab('s5','prebook')">Pre-book path</button>
+</div>
+
+<!-- STANDARD PATH -->
+<div class="path-content active" id="s5-standard">
+<h3 id="s5-activities">What you need to do</h3>
+<p>Before the onboarding clock starts, you must complete these activities. Partner Operations will not begin work until this gate is clear.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Activity</th>
+      <th>Owner</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Legal review and contract execution by both parties</td>
+      <td><span class="role role-pm">PM</span> + <span class="role role-legal">Legal</span></td>
+      <td>Use CLM for redlining and approvals</td>
+    </tr>
+    <tr>
+      <td>Ensure all tax forms are completed</td>
+      <td><span class="role role-pm">PM</span></td>
+      <td>Requirements vary by market</td>
+    </tr>
+    <tr>
+      <td>Complete Lounge Information Form (LIF)</td>
+      <td><span class="role role-pm">PM</span></td>
+      <td>All required fields. See critical fields below.</td>
+    </tr>
+    <tr>
+      <td>Complete technical questionnaire</td>
+      <td><span class="role role-pm">PM</span></td>
+      <td><span class="tbc">TBC</span> Link to updated questionnaire from Pramesh</td>
+    </tr>
+    <tr>
+      <td>Complete pre-book and LMS forms (if applicable)</td>
+      <td><span class="role role-pm">PM</span></td>
+      <td>See the Pre-book path tab if applicable. <span class="tbc">TBC</span> Link to LMS forms</td>
+    </tr>
+    <tr>
+      <td>Share photo guidelines with partner</td>
+      <td><span class="role role-pm">PM</span></td>
+      <td><span class="tbc">TBC</span> Link to photo guidelines in repository</td>
+    </tr>
+    <tr>
+      <td>Provide signed agreement to Finance and Partner Ops</td>
+      <td><span class="role role-pm">PM</span></td>
+      <td>Both teams need a copy</td>
+    </tr>
+    <tr>
+      <td>Agree expected launch date with partner</td>
+      <td><span class="role role-pm">PM</span></td>
+      <td>Standard: 21 business days from handoff. Set realistic expectations.</td>
+    </tr>
+    <tr>
+      <td>Create onboarding case in Salesforce</td>
+      <td><span class="role role-pm">PM</span></td>
+      <td>Attach all documents. Include special conditions not listed in LIF and full alternative benefit details for the Content Team.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="s5-critical-info">Critical information requirements</h3>
+<p>These fields cause activation delays if missing. Collect them early in the contracting process.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Information</th>
+      <th>Why it matters</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Full address including postal code</strong> (where required) and contact for receiving goods</td>
+      <td>Required for device shipping logistics. Missing postal codes delay kit dispatch in markets that require them. Not all countries use postal codes; confirm requirements with Partner Ops for specific markets.</td>
+    </tr>
+    <tr>
+      <td><strong>Banking details and tax forms</strong></td>
+      <td>Master Data team validates via independent verification. Lengthy process if incomplete.</td>
+    </tr>
+    <tr>
+      <td><strong>Contact information</strong>: main contact (GM, CEO, owner), operations, finance, lounge manager, trainer</td>
+      <td>All required for coordination and training setup.</td>
+    </tr>
+    <tr>
+      <td><strong>Marketing materials</strong>: logo, photos (meeting portal image criteria), description</td>
+      <td>Content team cannot create the listing without these.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout callout-warn">
+  <div class="callout-title">Critical fields for LIF completion</div>
+  <span class="tbc">TBC</span> The exact list of critical vs non-critical LIF fields is pending a session with Juan and the content team. Until then, treat all fields as critical.
+</div>
+</div>
+
+<!-- PRE-BOOK PATH -->
+<div class="path-content" id="s5-prebook">
+<h3 id="s5-prebook-heading">Additional steps when pre-book is in scope</h3>
+<p>Complete all standard path activities above, plus these additional steps.</p>
+
+<div class="callout callout-magenta">
+  <div class="callout-title">Pre-book should already be confirmed</div>
+  By Stage 5, you should have identified pre-book during negotiation (Stage 4), confirmed the partner can commit to pre-agreed availability, agreed on a variant (email only, LMS Pre-Book Portal, or Full LMS Suite), and flagged the contract addendum with Legal. If you have not done this, go back and complete those steps before proceeding.
+</div>
+
+<h4>Salesforce actions at Stage 4 (should already be done)</h4>
+<ul>
+  <li>Set <strong>Reservation (Pre-book)</strong> to "Yes - Additional Cost" or "Yes - Cost Included"</li>
+  <li>Set <strong>Pre-book Status (Partnerships)</strong> to "Negotiation"</li>
+  <li>Record any early commercial signals in the pre-book service fee fields if known</li>
+</ul>
+
+<h4>Stage 5 activities for pre-book</h4>
+<table>
+  <thead>
+    <tr>
+      <th>Activity</th>
+      <th>Owner</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Include pre-book addendum with the main contract</td>
+      <td><span class="role role-pm">PM</span> + <span class="role role-legal">Legal</span></td>
+      <td>Addendum covers fee per pre-booking and partner commission. It does not include operational details like availability schedules.</td>
+    </tr>
+    <tr>
+      <td>Complete Pre-Book Onboarding Form</td>
+      <td><span class="role role-pm">PM</span> + partner</td>
+      <td>One form per outlet. Must be 100% complete before handoff. No partial handoffs. Partners choosing Full LMS Suite use a different form; contact Loriana Martinez (Product).</td>
+    </tr>
+    <tr>
+      <td>Update Salesforce pre-book fields</td>
+      <td><span class="role role-pm">PM</span></td>
+      <td>Update Pre-book Service Fee (gross). Set Booking Integration Type to "Pre Agreed (GoMeddo)". Update Pre-book Status (Partnerships) to "Contract Finalised" once signed.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>What the Pre-Book Onboarding Form captures</h4>
+<ul>
+  <li><strong>Outlet details</strong>: name, IATA code, country, time zone (standard format, e.g. GMT+2, EST, SGT), notification email</li>
+  <li><strong>Availability schedule</strong>: days and time periods in 30-minute blocks, capacity per block, seasonal changes, blackout dates</li>
+  <li><strong>Booking parameters</strong>: maximum group size, cancellation window (minimum 48 hours), booking window (default 30 days)</li>
+  <li><strong>Pre-book management variant</strong>: email only, LMS Pre-Book Portal (recommended), or Full LMS Suite</li>
+  <li><strong>Special considerations</strong>: any unique operational requirements</li>
+  <li><strong>Partner acknowledgement</strong>: signed by partner confirming accuracy</li>
+  <li><strong>Partnership Manager sign-off</strong>: your name, outlet code, expected launch date</li>
+</ul>
+
+<div class="checklist">
+  <h4>Stage 5 pre-book completion check</h4>
+  <div class="checklist-item"><div class="box"></div>Pre-book addendum signed</div>
+  <div class="checklist-item"><div class="box"></div>Pre-Book Onboarding Form complete (or Full LMS Suite form if applicable)</div>
+  <div class="checklist-item"><div class="box"></div>Pre-book variant confirmed (email only / LMS Pre-Book Portal / Full LMS Suite)</div>
+  <div class="checklist-item"><div class="box"></div>All documents attached to the Salesforce onboarding case</div>
+  <div class="checklist-item"><div class="box"></div>Salesforce pre-book fields updated</div>
+</div>
+</div>
+
+<!-- STAGE 5 GATE -->
+<div class="gate" id="s5-gate">
+  <h3>Stage gate: Contracting &#10132; Onboarding</h3>
+  <div class="gate-owner">Gate owners: Legal (contract execution) + Partner Ops Lead (information completeness)</div>
+  <p style="margin-bottom: 16px; font-size: 14px; opacity: 0.9;">ALL criteria must be met before the onboarding clock starts.</p>
+  <div class="checklist-item"><div class="box"></div>Contract fully executed by both parties</div>
+  <div class="checklist-item"><div class="box"></div>Signed agreement provided to Finance and Partner Ops</div>
+  <div class="checklist-item"><div class="box"></div>Tax forms completed (market-specific)</div>
+  <div class="checklist-item"><div class="box"></div>LIF complete with all required fields <span class="tbc">TBC</span></div>
+  <div class="checklist-item"><div class="box"></div>Technical questionnaire complete</div>
+  <div class="checklist-item"><div class="box"></div>Pre-book and LMS forms complete (if applicable)</div>
+  <div class="checklist-item"><div class="box"></div>Onboarding case created in Salesforce with all special conditions and alternative benefit details</div>
+  <div class="checklist-item"><div class="box"></div>Partner Ops confirms information completeness</div>
+  <div class="checklist-item"><div class="box"></div>Expected launch date agreed (21+ business days from handoff, or extended for complex partners)</div>
+</div>
+
+<div class="collapsible">
+  <button class="collapsible-trigger" onclick="toggleCollapsible(this)">
+    What happens if the gate fails?
+    <span class="arrow">&#9654;</span>
+  </button>
+  <div class="collapsible-body">
+    <table>
+      <thead>
+        <tr><th>Issue</th><th>Action</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Contract execution delayed</td>
+          <td>Legal and Regional Partnerships coordinate resolution. No onboarding starts.</td>
+        </tr>
+        <tr>
+          <td>LIF incomplete</td>
+          <td>Onboarding paused. Request missing information from Partnership Manager. Clock restarts when complete.</td>
+        </tr>
+        <tr>
+          <td>Technical questionnaire incomplete</td>
+          <td>Same as LIF. Clock pauses until received.</td>
+        </tr>
+        <tr>
+          <td>Pre-book/LMS forms absent or incomplete</td>
+          <td>Does not delay standard lounge onboarding. However, no pre-book or LMS implementation starts until the proper documentation is complete.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</section>
+
+<!-- ================================================================ -->
+<!-- STAGE 6 -->
+<!-- ================================================================ -->
+<section id="stage6">
+<div class="stage-banner">
+  <div class="stage-number">6</div>
+  <div class="stage-info">
+    <h2>Onboarding</h2>
+    <p>Systems, listings, training, and finance setup. Partner Operations owns this stage.</p>
+  </div>
+</div>
+
+<div class="meta-box">
+  <div class="meta-item">
+    <div class="label">Owner</div>
+    <div class="value">Partner Ops + Finance</div>
+  </div>
+  <div class="meta-item">
+    <div class="label">Duration</div>
+    <div class="value">21 business days</div>
+  </div>
+  <div class="meta-item">
+    <div class="label">Trigger</div>
+    <div class="value">Stage 5 gate criteria met</div>
+  </div>
+  <div class="meta-item">
+    <div class="label">Supporting</div>
+    <div class="value">IT, Content, Finance, Marketing</div>
+  </div>
+</div>
+
+<div class="callout callout-blue">
+  <div class="callout-title">Timeline note</div>
+  The 21-day timeline accounts for customs clearance, translation turnaround (up to 10 business days), and listing approval processes. Complex partners (airlines with 40+ lounges, operators with 10+ locations) may require extended timelines. Partner Ops will communicate revised timelines when needed.
+</div>
+
+<!-- TABS -->
+<div class="path-tabs" data-group="s6">
+  <button class="path-tab active" onclick="switchTab('s6','standard')">Standard path</button>
+  <button class="path-tab prebook" onclick="switchTab('s6','prebook')">Pre-book path</button>
+</div>
+
+<!-- STANDARD PATH -->
+<div class="path-content active" id="s6-standard">
+
+<h3 id="s6-phase1">Phase 1: Enablement (days 1 to 14)</h3>
+
+<div class="timeline">
+  <div class="timeline-item">
+    <div class="time-label">Day 1: Case validation</div>
+    <div class="time-content">
+      <span class="role role-ops">Partner Ops</span> receives Salesforce case, validates information completeness, confirms green to proceed or pauses for missing data.
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="time-label">Days 2 to 5: System configuration and kit dispatch</div>
+    <div class="time-content">
+      <span class="role role-ops">Partner Ops</span> configures PPBO, Product Catalogue, Lounge Gateway system, and device registration. Kit dispatch starts as soon as system setup is complete to avoid customs delays (subject to number of devices required).
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="time-label">Days 3 to 10: Content and listing creation</div>
+    <div class="time-content">
+      <span class="role role-ops">Content team</span> creates and translates the lounge listing using partner-provided materials. Translation can take up to 10 business days. Content team sends listing to the Partnership Manager with comments/questions or for final approval with partner. Once addressed and approved by partner, listing is complete.
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="time-label">Days 11 to 14: UAT testing</div>
+    <div class="time-content">
+      <span class="role role-ops">Partner Ops</span> conducts user acceptance testing on all systems. <strong>100% pass rate required</strong> before proceeding.
+    </div>
+  </div>
+</div>
+
+<!-- VENDOR CODE PROCESS -->
+<h3 id="s6-vendor-code">Vendor code setup (parallel track)</h3>
+<p>This runs alongside Phase 1. No vendor code means no invoice processing, which means no launch. This process involves both the Partnerships team and the Master Data team.</p>
+
+<div class="vendor-flow">
+  <div class="vendor-lane partnerships">
+    <div class="lane-label">Partnerships team</div>
+    <div class="vendor-steps">
+      <div class="vendor-step">Create vendor on Salesforce</div>
+      <span class="vendor-arrow">&#8594;</span>
+      <div class="vendor-step">Upload contract and get bank details in CLM</div>
+      <span class="vendor-arrow">&#8594;</span>
+      <div class="vendor-step">Complete and submit MS form (inc. bank details) to Master Data team</div>
+      <span class="vendor-arrow">&#8594;</span>
+      <div class="vendor-step" style="border-color: var(--teal);">Enter vendor code in Salesforce</div>
+    </div>
+  </div>
+  <div class="vendor-lane masterdata">
+    <div class="lane-label">Master Data team</div>
+    <div class="vendor-steps">
+      <div class="vendor-step">Receive MS form by email, verify bank details</div>
+      <span class="vendor-arrow">&#8594;</span>
+      <div class="vendor-step decision">UK bank? If yes: verify on Access Pay. If no: contact vendor to verify.</div>
+      <span class="vendor-arrow">&#8594;</span>
+      <div class="vendor-step">Create vendor on Microsoft Dynamics, generate vendor code</div>
+      <span class="vendor-arrow">&#8594;</span>
+      <div class="vendor-step">Send vendor code to Partnerships team</div>
+    </div>
+  </div>
+</div>
+
+<div class="callout callout-warn">
+  <div class="callout-title">Your role in vendor code setup</div>
+  As the Partnership Manager, you:
+  <ol style="margin-top: 8px;">
+    <li>Create the vendor record on Salesforce</li>
+    <li>Upload the contract and get bank details in CLM</li>
+    <li>Complete and submit the MS form (which includes data already in Salesforce and CLM) to the Master Data team</li>
+    <li>Educate the partner on the invoice process</li>
+    <li>Once you receive the vendor code from Master Data, enter it in Salesforce</li>
+  </ol>
+  <br>
+  <span class="tbc">TBC</span> New vendor/partner risk email process from Juan
+</div>
+
+<h3 id="s6-phase2">Phase 2: Activation preparation (days 15 to 21)</h3>
+
+<div class="timeline">
+  <div class="timeline-item">
+    <div class="time-label">Days 15 to 16: Kit dispatch and PCI form</div>
+    <div class="time-content">
+      <span class="role role-ops">Partner Ops</span> dispatches onboarding kit (device, signage, materials) if not already done in Phase 1. Tracks delivery. Sends PCI compliance form to partner via DocuSign.
+      <br><br>
+      <strong>Partnership Manager action</strong>: assign outlet contacts in Salesforce before this step so Partner Ops knows who to send the PCI form to. The contact should be Operations or the lounge contact, as they are responsible for the point-of-sale device. <span class="tbc">TBC</span> Link to contact assignment SOP.
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="time-label">Days 17 to 19: Training and PCI validation</div>
+    <div class="time-content">
+      <span class="role role-ops">Partner Ops</span> conducts partner training on Lounge Gateway. Maximum 3 hours. All staff must attend. Covers technical support and escalation handling. Validates PCI form completion before device activation.
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="time-label">Days 20 to 21: Readiness</div>
+    <div class="time-content">
+      <span class="role role-ops">Partner Ops</span> validates operational readiness. Confirms PCI form is signed. Confirms launch date. Completes handoff briefing to the Partnership Manager. Updates onboarding case and tags the Partnership Manager.
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- PRE-BOOK PATH -->
+<div class="path-content" id="s6-prebook">
+<h3 id="s6-prebook-heading">Pre-book onboarding (runs alongside standard onboarding)</h3>
+
+<div class="callout callout-magenta">
+  <div class="callout-title">Who does what</div>
+  <span class="role role-ops">Partner Ops (Abel)</span> handles availability configuration.
+  <span class="role role-product">Product (Taz, Faz)</span> handles booking system integration.
+  <span class="role role-product">Product (Loriana)</span> handles LMS portal setup.
+  The Partnership Manager ensures handoffs are clean and monitors progress via Salesforce.
+</div>
+
+<div class="callout callout-blue">
+  <div class="callout-title">Adding pre-book to an existing lounge</div>
+  If you are adding pre-book to a lounge that is already live on the network, the standard lounge setup steps do not apply. Follow only the pre-book configuration steps below.
+</div>
+
+<div class="timeline">
+  <div class="timeline-item">
+    <div class="time-label">Week 1: Availability configuration</div>
+    <div class="time-content">
+      <span class="role role-ops">Partner Ops (Abel)</span> creates the lounge resource, configures the pre-agreed availability schedule from the form, sets slot patterns and capacity limits, and provides environment IDs for testing.
+      <br><br>
+      <strong>If LMS Pre-Book Portal or Full LMS Suite</strong>: <span class="role role-product">Product (Loriana)</span> creates the partner's LMS account and configures the lounge in the portal. Partner Ops emails Loriana when the form shows LMS is required (manual step for now).
+      <br><br>
+      <strong>If email only</strong>: Partner Ops configures the reservation email field in the outlet record.
+      <br><br>
+      <em>Note: The LMS team does not have access to the outlet record. Partner Ops handles that configuration and notifies the LMS team when LMS setup is needed.</em>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="time-label">Weeks 2 to 4: Integration and testing</div>
+    <div class="time-content">
+      <span class="role role-product">Product (Taz and Faz)</span> runs booking system integration: loads parameters (booking window, cancellation window, maximum group size, pricing), runs end-to-end testing covering availability, booking, and confirmation delivery. <strong>100% pass rate required.</strong>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="time-label">Week 4: Partner training and readiness</div>
+    <div class="time-content">
+      <strong>If LMS Pre-Book Portal or Full LMS Suite</strong>: train partner staff on viewing reservations, confirming guest arrivals, and using reports for invoicing.
+      <br><br>
+      <strong>If email only</strong>: explain how email confirmations work, confirm partner knows how to track reservations manually.
+      <br><br>
+      <strong>All variants</strong>: confirm the partner can receive and manage pre-bookings. Ensure the partner knows how to reach support for pre-book issues.
+    </div>
+  </div>
+</div>
+
+<h4>Salesforce actions during Stage 6</h4>
+<ul>
+  <li><span class="role role-product">Product (Taz)</span> updates <strong>Pre-book Status (Product)</strong>: Integration in progress &#8594; Release planned &#8594; Released</li>
+  <li><span class="role role-pm">PM</span> updates <strong>Pre-book Start Date</strong> once the go-live date is confirmed</li>
+</ul>
+
+<div class="checklist">
+  <h4>Stage 6 pre-book completion check</h4>
+  <div class="checklist-item"><div class="box"></div>Availability schedule configured and tested</div>
+  <div class="checklist-item"><div class="box"></div>LMS portal configured (if LMS variant selected)</div>
+  <div class="checklist-item"><div class="box"></div>Email confirmations configured and tested (if email only variant selected)</div>
+  <div class="checklist-item"><div class="box"></div>Booking system integration complete and tested end-to-end</div>
+  <div class="checklist-item"><div class="box"></div>Capacity limits validated in testing</div>
+  <div class="checklist-item"><div class="box"></div>Partner trained and able to manage pre-bookings</div>
+  <div class="checklist-item"><div class="box"></div>Product confirms ready to go live</div>
+  <div class="checklist-item"><div class="box"></div>Pre-book Start Date entered in Salesforce</div>
+</div>
+
+<div class="callout callout-blue">
+  <div class="callout-title">Timeline</div>
+  Pre-book onboarding takes approximately 4 weeks. The clock starts when Product confirms the work is in their sprint, not from your handoff date. Total with pre-book: approximately 4 to 5 weeks from complete handoff.
+</div>
+</div>
+
+<!-- STAGE 6 GATE -->
+<div class="gate" id="s6-gate">
+  <h3>Stage gate: Onboarding &#10132; Activation</h3>
+  <div class="gate-owner">Gate owner: Partner Ops Lead</div>
+  <p style="margin-bottom: 16px; font-size: 14px; opacity: 0.9;">ALL criteria must be met before the partner goes live.</p>
+  <div class="checklist-item"><div class="box"></div>All systems configured and UAT passed</div>
+  <div class="checklist-item"><div class="box"></div>Device delivered and tested</div>
+  <div class="checklist-item"><div class="box"></div>Partner training completed, staff trained</div>
+  <div class="checklist-item"><div class="box"></div>PCI compliance form completed and signed</div>
+  <div class="checklist-item"><div class="box"></div>Finance setup complete (vendor code created and added to Salesforce)</div>
+  <div class="checklist-item"><div class="box"></div>Partner confirms readiness to launch</div>
+  <div class="checklist-item"><div class="box"></div>Partnership Manager briefed</div>
+  <div class="checklist-item"><div class="box"></div>Launch date confirmed (within 21 business days or extended timeline approved)</div>
+  <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.2);">
+    <p style="font-size: 13px; opacity: 0.8; margin-bottom: 8px;">Additional criteria if pre-book is in scope:</p>
+    <div class="checklist-item"><div class="box"></div>Pre-book availability configured and tested</div>
+    <div class="checklist-item"><div class="box"></div>Booking integration tested end-to-end (100% pass)</div>
+    <div class="checklist-item"><div class="box"></div>Partner trained on pre-book management</div>
+    <div class="checklist-item"><div class="box"></div>Product confirms ready to go live</div>
+  </div>
+</div>
+
+<div class="collapsible">
+  <button class="collapsible-trigger" onclick="toggleCollapsible(this)">
+    What happens if the gate fails?
+    <span class="arrow">&#9654;</span>
+  </button>
+  <div class="collapsible-body">
+    <table>
+      <thead>
+        <tr><th>Issue</th><th>Action</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Technical issues</td>
+          <td>Escalate to Partner Support. Resolve before launch. Do not proceed.</td>
+        </tr>
+        <tr>
+          <td>Training incomplete</td>
+          <td>Schedule additional training, extend timeline. Partner must be trained and comfortable.</td>
+        </tr>
+        <tr>
+          <td>Finance setup delayed</td>
+          <td>Coordinate with Finance. Do not launch until vendor code created and added to Salesforce.</td>
+        </tr>
+        <tr>
+          <td>Timeline extension required</td>
+          <td>Follow exception governance process (see below).</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</section>
+
+<!-- ================================================================ -->
+<!-- STAGE 7 -->
+<!-- ================================================================ -->
+<section id="stage7">
+<div class="stage-banner">
+  <div class="stage-number">7</div>
+  <div class="stage-info">
+    <h2>Activation</h2>
+    <p>First 30 days post-launch. Monitor, support, and transition to ongoing management.</p>
+  </div>
+</div>
+
+<div class="meta-box">
+  <div class="meta-item">
+    <div class="label">Owner (days 1 to 14)</div>
+    <div class="value">Partner Ops + Partnerships Manager</div>
+  </div>
+  <div class="meta-item">
+    <div class="label">Owner (days 15 to 30)</div>
+    <div class="value">Partnerships Manager</div>
+  </div>
+  <div class="meta-item">
+    <div class="label">Duration</div>
+    <div class="value">30 days</div>
+  </div>
+</div>
+
+<div class="callout callout-blue">
+  <div class="callout-title">Launch coordination</div>
+  <span class="tbc">TBC</span> Details on go-live timing, marketing coordination, signage validation, and volume expectations are under development. This section will be updated in a future version.
+</div>
+
+<!-- TABS -->
+<div class="path-tabs" data-group="s7">
+  <button class="path-tab active" onclick="switchTab('s7','standard')">Standard path</button>
+  <button class="path-tab prebook" onclick="switchTab('s7','prebook')">Pre-book path</button>
+</div>
+
+<!-- STANDARD PATH -->
+<div class="path-content active" id="s7-standard">
+
+<h3 id="s7-milestones">Weekly milestones</h3>
+
+<div class="timeline">
+  <div class="timeline-item">
+    <div class="time-label">Days 1 to 7: Launch validation</div>
+    <div class="time-content">
+      Partner goes live and processes first transactions. <span class="role role-ops">Partner Ops</span> monitors technical performance. Review listing in web and app to confirm outlet appears correctly, in the right category, with current information. Week 1 check-in call covers operational readiness and any issues.
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="time-label">Days 8 to 14: Volume and feedback</div>
+    <div class="time-content">
+      Transaction volume tracking begins. Staff and guest feedback collection. Week 2 check-in call covers volume trends and operational adjustments. <strong>Handoff from Partner Ops to Partnership Manager begins.</strong>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="time-label">Days 15 to 21: Invoice support</div>
+    <div class="time-content">
+      <span class="role role-pm">PM</span> now owns the relationship. First invoice preparation support. Finance process validation. Week 3 check-in call covers invoice readiness and any questions.
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="time-label">Days 22 to 30: Health check and transition</div>
+    <div class="time-content">
+      30-day health check meeting: performance review and satisfaction assessment. <strong>Health score assigned (Green / Yellow / Red).</strong> Transition to standard QBR rhythm. Handoff to ongoing management complete.
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- PRE-BOOK PATH -->
+<div class="path-content" id="s7-prebook">
+<h3 id="s7-prebook-heading">Pre-book activation (additional monitoring)</h3>
+<p>Pre-book activation runs on the same 30-day timeline as standard activation, with extra checks.</p>
+
+<div class="timeline">
+  <div class="timeline-item">
+    <div class="time-label">Days 1 to 3: First pre-bookings</div>
+    <div class="time-content">
+      Confirm first pre-bookings are created successfully. Confirm the partner is receiving notifications (email or portal). Verify capacity limits are working correctly.
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="time-label">Days 4 to 7: Early review</div>
+    <div class="time-content">
+      Review early pre-booking patterns. Collect initial partner feedback. Address any issues.
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="time-label">Days 8 to 30: Ongoing monitoring</div>
+    <div class="time-content">
+      Review pre-booking volumes over time. Assess if the pre-agreed capacity allocation is appropriate. Collect partner feedback on the operational experience. Include pre-book in the 30-day health check. Transition pre-book support to standard channels.
+      <br><br>
+      <em>Volume will vary. Some lounges may not see their first pre-bookings for several days or weeks, depending on how actively the service is promoted. Adjust your monitoring accordingly.</em>
+    </div>
+  </div>
+</div>
+
+<div class="callout callout-magenta">
+  <div class="callout-title">Day 14 handoff</div>
+  Product hands off pre-book monitoring to the Partnership Manager at Day 14. From this point, include pre-book status in your weekly check-ins and the 30-day health check.
+</div>
+
+<div class="checklist">
+  <h4>Pre-book activation completion check</h4>
+  <div class="checklist-item"><div class="box"></div>First pre-bookings completed successfully</div>
+  <div class="checklist-item"><div class="box"></div>Partner receiving and managing notifications correctly</div>
+  <div class="checklist-item"><div class="box"></div>Capacity limits enforced</div>
+  <div class="checklist-item"><div class="box"></div>Partner satisfied with pre-booking operations</div>
+  <div class="checklist-item"><div class="box"></div>Pre-book included in 30-day health check</div>
+</div>
+</div>
+
+<!-- STAGE 7 GATE -->
+<div class="gate" id="s7-gate">
+  <h3>Stage gate: Activation &#10132; Growth</h3>
+  <div class="gate-owner">Gate owners: Partnership Manager + Partner Ops Lead (joint assessment)</div>
+  <div class="checklist-item"><div class="box"></div>First transactions completed successfully (within 48 hours of launch)</div>
+  <div class="checklist-item"><div class="box"></div>30-day health check completed</div>
+  <div class="checklist-item"><div class="box"></div>Health score is GREEN or YELLOW with support plan</div>
+  <div class="checklist-item"><div class="box"></div>First invoice submitted within 45 days of launch</div>
+  <div class="checklist-item"><div class="box"></div>Partner confirms satisfaction with onboarding and activation</div>
+  <div class="checklist-item"><div class="box"></div>Partnership Manager confirms readiness for standard QBR rhythm</div>
+</div>
+
+<div class="collapsible">
+  <button class="collapsible-trigger" onclick="toggleCollapsible(this)">
+    What happens if the gate fails?
+    <span class="arrow">&#9654;</span>
+  </button>
+  <div class="collapsible-body">
+    <table>
+      <thead>
+        <tr><th>Issue</th><th>Action</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>RED health score</td>
+          <td>Escalate to Regional Partnership Director. Develop intervention plan. Extend weekly check-ins until GREEN.</td>
+        </tr>
+        <tr>
+          <td>No transactions within 48 hours</td>
+          <td>Partnership Manager contacts partner immediately. Partner Ops investigates technical issues.</td>
+        </tr>
+        <tr>
+          <td>Invoice not submitted</td>
+          <td>Finance Ops provides immediate support. Partnership Manager follows up.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</section>
+
+<!-- ================================================================ -->
+<!-- EXCEPTION GOVERNANCE -->
+<!-- ================================================================ -->
+<section id="exception-governance">
+<h2>Exception governance</h2>
+<p>The onboarding process is designed to ensure quality and readiness. Exceptions require formal approval and documented business justification.</p>
+
+<h3>Standard process (no exceptions)</h3>
+<ul>
+  <li>Contract must be signed before onboarding case creation</li>
+  <li>LIF must be complete before the onboarding clock starts</li>
+  <li>Standard timeline is 21 business days from contract signature to launch readiness</li>
+  <li>All stage gate criteria must be met before proceeding to the next stage</li>
+</ul>
+
+<h3>Escalation: request to proceed without a contract</h3>
+<p>If Partner Operations is asked to proceed with onboarding before the contract is signed:</p>
+<ol>
+  <li>Partner Ops declines and documents the request in the Salesforce case</li>
+  <li>Partner Ops escalates to Regional Partnership Director/VP</li>
+  <li>Regional Partnership Director/VP resolves with appropriate stakeholders before any work proceeds</li>
+  <li>If an exception is absolutely required (extremely rare, given legal and financial risk), final approval sits with SVP Global Partnerships</li>
+</ol>
+
+<div class="callout callout-red">
+  <div class="callout-title">Standard answer</div>
+  No onboarding work begins without a signed contract. This protects Collinson from financial exposure and legal liability.
+</div>
+
+<h3>Exception types</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Definition</th>
+      <th>Approver</th>
+      <th>Conditions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>A: Accelerated timeline</strong></td>
+      <td>Complete onboarding in fewer than 21 business days</td>
+      <td>Regional Partnership Director</td>
+      <td>Tier 1A/1B strategic partner. Business justification documented (competitive threat, client requirement). Partner Ops confirms technical feasibility. Contract and LIF still must be complete. UAT cannot be skipped.</td>
+    </tr>
+    <tr>
+      <td><strong>B: Partial information start</strong></td>
+      <td>Begin onboarding with incomplete LIF</td>
+      <td>Partner Ops Lead</td>
+      <td>90% of LIF complete. Missing fields are non-critical <span class="tbc">TBC</span>. Clear deadline set. Clock stops until information complete. UAT pauses until fields received.</td>
+    </tr>
+    <tr>
+      <td><strong>C: Launch without PCI</strong></td>
+      <td>Activate device before PCI compliance form is signed</td>
+      <td>VP Global Partnerships</td>
+      <td>Urgent business requirement documented. Partner commits to completion within 10 days of launch. PCI form sent the same day as device kit. Escalation ladder: Day 10 documented reminder, Day 20 escalation to partner senior leadership, Day 30 escalation to VP Global Partnerships.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Pre-book exceptions</h4>
+<table>
+  <thead>
+    <tr>
+      <th>Scenario</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Partner wants pre-book but cannot commit to pre-agreed availability</td>
+      <td>Explain that pre-agreed capacity is required. Without it, we cannot manage availability or prevent overbooking. Escalate to Product if the partner has an alternative technical approach. Do not proceed with this process.</td>
+    </tr>
+    <tr>
+      <td>Non-standard request (e.g. cancellation window below 48 hours, unusual capacity patterns)</td>
+      <td>Document in Section 5 of the Pre-Book Onboarding Form. Escalate to Product (Taz and Faz) before the contract is signed. Product provides go/no-go and timeline impact. Do not promise non-standard terms without Product approval.</td>
+    </tr>
+    <tr>
+      <td>Accelerated pre-book timeline (fewer than 28 business days)</td>
+      <td>Follow standard exception governance. Regional Partnership Director approval + Product feasibility confirmation. Minimum 14 business days due to technical dependencies.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="never-approved">
+  <h4>Never approved</h4>
+  <p style="color: #AAA; font-size: 13px; margin-bottom: 12px;">These exceptions create unacceptable risk and will not be approved under any circumstances.</p>
+  <ul>
+    <li><strong>Shipping devices before contract signed</strong>: creates financial exposure and legal liability</li>
+    <li><strong>Starting onboarding without postal codes</strong> (where required): causes logistics failure</li>
+    <li><strong>Starting onboarding without banking details</strong>: prevents invoice processing</li>
+    <li><strong>Skipping UAT testing</strong>: creates operational failure risk</li>
+    <li><strong>Launching before training complete</strong>: partner and staff not trained to serve guests</li>
+  </ul>
+</div>
+</section>
+
+<!-- ================================================================ -->
+<!-- DECISION RIGHTS -->
+<!-- ================================================================ -->
+<section id="decision-rights">
+<h2>Decision rights</h2>
+
+<h3>Standard onboarding</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Decision</th>
+      <th>Decision maker</th>
+      <th>Authority</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Information completeness</td>
+      <td>Partner Ops Lead</td>
+      <td>Is the LIF sufficient to proceed?</td>
+    </tr>
+    <tr>
+      <td>Technical feasibility</td>
+      <td>Partner Ops Lead</td>
+      <td>Can we meet the proposed timeline?</td>
+    </tr>
+    <tr>
+      <td>Pause/resume clock</td>
+      <td>Partner Ops Lead</td>
+      <td>When information is missing</td>
+    </tr>
+    <tr>
+      <td>Timeline acceleration</td>
+      <td>Regional Partnership Director</td>
+      <td>For strategic partners</td>
+    </tr>
+    <tr>
+      <td>Major policy exceptions</td>
+      <td>VP Global Partnerships</td>
+      <td>Outside standard framework</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Pre-book decisions</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Decision</th>
+      <th>Decision maker</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Pre-book included in partnership</td>
+      <td>Partnership Manager</td>
+      <td>Based on partner need and ability to commit capacity</td>
+    </tr>
+    <tr>
+      <td>Capacity allocation</td>
+      <td>Partnership Manager + partner</td>
+      <td>Defined in the Pre-Book Onboarding Form</td>
+    </tr>
+    <tr>
+      <td>Pre-book variant</td>
+      <td>Partnership Manager + partner</td>
+      <td>Email only, LMS Pre-Book Portal, or Full LMS Suite</td>
+    </tr>
+    <tr>
+      <td>Custom parameters</td>
+      <td>Product (Taz and Faz)</td>
+      <td>Technical feasibility required before contract signature</td>
+    </tr>
+    <tr>
+      <td>Schedule changes (post-launch)</td>
+      <td>Partner Operations</td>
+      <td>Partner resubmits availability form with changes</td>
+    </tr>
+    <tr>
+      <td>Policy changes</td>
+      <td>Product (Taz and Faz)</td>
+      <td>Requires booking system update; longer lead time</td>
+    </tr>
+  </tbody>
+</table>
+</section>
+
+<!-- ================================================================ -->
+<!-- SALESFORCE -->
+<!-- ================================================================ -->
+<section id="salesforce">
+<h2>Salesforce tracking</h2>
+<p>Partner progress is tracked at two levels in Salesforce: Opportunity stages (partnership lifecycle) and Case statuses (onboarding operations).</p>
+
+<h3>Opportunity stage progression</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Partnership stage</th>
+      <th>Opportunity stage</th>
+      <th>Updated by</th>
+      <th>When</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Stage 5: Contracting</td>
+      <td>Contracting &#8594; Contract Approval</td>
+      <td><span class="role role-pm">PM</span></td>
+      <td>Contract signed by both parties</td>
+    </tr>
+    <tr>
+      <td>Stage 6: Onboarding</td>
+      <td>Onboarding</td>
+      <td><span class="role role-pm">PM</span></td>
+      <td>Onboarding case created</td>
+    </tr>
+    <tr>
+      <td>Stage 7: Activation</td>
+      <td>Live</td>
+      <td><span class="role role-pm">PM</span></td>
+      <td>Partner activated, accepting members</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Onboarding case status progression</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Case status</th>
+      <th>Phase</th>
+      <th>Updated by</th>
+      <th>When</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Ready to Setup</td>
+      <td>Day 1</td>
+      <td><span class="role role-ops">Partner Ops</span></td>
+      <td>Case received, information validated</td>
+    </tr>
+    <tr>
+      <td>Despatch</td>
+      <td>Days 2 to 5 (or 15 to 16)</td>
+      <td><span class="role role-ops">Partner Ops</span></td>
+      <td>Device kit and PCI form sent</td>
+    </tr>
+    <tr>
+      <td>Training</td>
+      <td>Days 17 to 19</td>
+      <td><span class="role role-ops">Partner Ops</span></td>
+      <td>Training scheduled or in progress</td>
+    </tr>
+    <tr>
+      <td>Training Completed</td>
+      <td>Day 19</td>
+      <td><span class="role role-ops">Partner Ops</span></td>
+      <td>Training complete, PCI validated</td>
+    </tr>
+    <tr>
+      <td>Ready to Activate</td>
+      <td>Days 20 to 21</td>
+      <td><span class="role role-ops">Partner Ops</span></td>
+      <td>All gates met, ready for launch</td>
+    </tr>
+    <tr>
+      <td>Closed</td>
+      <td>Stage 7</td>
+      <td><span class="role role-ops">Partner Ops</span></td>
+      <td>Partner goes live (Opportunity moved to Live)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Pre-book Salesforce fields</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>When to fill</th>
+      <th>What to enter</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Reservation (Pre-book)</td>
+      <td>Stage 4 (Negotiation)</td>
+      <td>"Yes - Additional Cost" (standard) or "Yes - Cost Included"</td>
+    </tr>
+    <tr>
+      <td>Pre-book Service Fee (gross)</td>
+      <td>Stage 5 (Contracting)</td>
+      <td>Gross fee per pre-booking as agreed in addendum</td>
+    </tr>
+    <tr>
+      <td>Pre-book Service Fee (net)</td>
+      <td>Stage 5</td>
+      <td>Calculated automatically on save. No manual entry.</td>
+    </tr>
+    <tr>
+      <td>Booking Integration Type</td>
+      <td>Stage 5</td>
+      <td>"Pre Agreed (GoMeddo)" for LMS Portal and email only. "API Integrated" for API. "Non Integrated" for email only where applicable.</td>
+    </tr>
+    <tr>
+      <td>Pre-book Status (Partnerships)</td>
+      <td>Stages 4 to 7 (ongoing)</td>
+      <td>Not Started &#8594; Planning &#8594; Negotiation &#8594; Commercials Agreed &#8594; Contract Finalised &#8594; Declined</td>
+    </tr>
+    <tr>
+      <td>Pre-book Start Date</td>
+      <td>Once confirmed</td>
+      <td>Go-live date. Not always known at the start.</td>
+    </tr>
+    <tr>
+      <td>Pre-book Status (Product)</td>
+      <td>During onboarding</td>
+      <td>Managed by Product. PMs do not update this field.</td>
+    </tr>
+    <tr>
+      <td>Max Guests</td>
+      <td>As applicable</td>
+      <td>Not mandatory. Fill if relevant for the outlet.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Communication protocol</h3>
+<div class="callout callout-teal">
+  <div class="callout-title">Single source of truth</div>
+  All onboarding updates, questions, and issues must be logged in Salesforce case comments. <span class="tbc">TBC</span> Standard comment formats from Juan. Partnership Manager tagged in case at Day 14 handoff. Partner Ops tags the PM when partner input or decision is needed. Escalations documented in case with @mention to the appropriate owner. Email and Teams should only be used for urgent issues requiring immediate attention. All outcomes must be logged back to the Salesforce case.
+</div>
+
+<h4>Partnership Manager Salesforce responsibilities</h4>
+<ul>
+  <li>Create onboarding case when contract signed (Stage 5 to 6 transition)</li>
+  <li>Move Opportunity to "Onboarding" when case created</li>
+  <li>Move Opportunity to "Live" when partner activated (Stage 7)</li>
+</ul>
+
+<h4>Partner Ops Salesforce responsibilities</h4>
+<ul>
+  <li>Update case status within 24 hours of milestone completion</li>
+  <li>Tag Partnership Manager in case when moving to "Ready to Activate"</li>
+  <li>Close case when partner goes live</li>
+</ul>
+</section>
+
+<!-- ================================================================ -->
+<!-- PRE-BOOK VARIANTS -->
+<!-- ================================================================ -->
+<section id="prebook-variants">
+<h2>Pre-book variants guide</h2>
+<p>When a partner agrees to pre-book with pre-agreed availability, they choose one of three management variants.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Variant</th>
+      <th>What the partner gets</th>
+      <th>Best fit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Email only</strong></td>
+      <td>A confirmation email for every pre-booking. No portal access.</td>
+      <td>Low-volume partners, or partners who do not expect frequent pre-bookings. Harder to manage at scale.</td>
+    </tr>
+    <tr>
+      <td><strong>LMS Pre-Book Portal</strong> (recommended)</td>
+      <td>Portal to view upcoming reservations, confirm guest arrivals, and access reports. Plus email confirmations.</td>
+      <td>Recommended for most partners.</td>
+    </tr>
+    <tr>
+      <td><strong>Full LMS Suite</strong></td>
+      <td>Everything in the portal, plus full lounge management: check-in, waitlist, and comprehensive reporting.</td>
+      <td>Partners who want to manage all lounge operations through one system.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout callout-magenta">
+  <div class="callout-title">Full LMS Suite</div>
+  Partners choosing Full LMS Suite use a different onboarding form and a different configuration process. Contact Loriana Martinez (Product) if a partner selects this option.
+</div>
+
+<h3>Key principles for pre-book</h3>
+<ul>
+  <li><strong>A confirmed booking means confirmed access.</strong> Partners commit to honouring the slots they allocate. A pre-booked member has a reservation, not a waitlist position.</li>
+  <li><strong>LMS Portal is optional but recommended.</strong> Email only is difficult to manage at scale. Encourage the LMS Pre-Book Portal for any partner expecting regular volume.</li>
+  <li><strong>Do not promise anything non-standard without Product approval.</strong> Cancellation windows below 48 hours, non-standard capacity patterns, or anything outside the norm must go to Taz (Product) before the contract is signed.</li>
+  <li><strong>The form must be complete before handoff.</strong> An incomplete handoff causes delays for Partner Operations and Product. Do not send a partial form.</li>
+</ul>
+</section>
+
+<!-- ================================================================ -->
+<!-- SCHEDULE CHANGES -->
+<!-- ================================================================ -->
+<section id="schedule-changes">
+<h2>Schedule changes (post-launch)</h2>
+<p>After launch, partners may need to update their availability: capacity changes, new blackout dates, and so on.</p>
+
+<h3>Process</h3>
+<ol>
+  <li>Partner contacts their Partnership Manager with the requested change</li>
+  <li>Partner resubmits the availability section of the Pre-Book Onboarding Form with the changes marked</li>
+  <li>Partnership Manager (or Wendy) assigns the update task to Partner Operations</li>
+  <li>Partner Operations updates the configuration</li>
+  <li>Partner Operations confirms completion</li>
+  <li>Partnership Manager notifies the partner</li>
+</ol>
+<p>Schedule changes take approximately 2 to 3 business days.</p>
+
+<div class="callout callout-warn">
+  <div class="callout-title">Policy changes take longer</div>
+  Changes to booking policy (cancellation window, booking window, maximum group size) involve the Product team. Coordinate with Taz early.
+</div>
+</section>
+
+<!-- ================================================================ -->
+<!-- CONTACTS -->
+<!-- ================================================================ -->
+<section id="contacts">
+<h2>Key contacts</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Team</th>
+      <th>Responsibility</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Taz Miah</td>
+      <td><span class="role role-product">Product</span></td>
+      <td>Booking system configuration, timelines, open technical questions</td>
+    </tr>
+    <tr>
+      <td>Loriana Martinez</td>
+      <td><span class="role role-product">Product</span></td>
+      <td>LMS Portal setup and reporting</td>
+    </tr>
+    <tr>
+      <td>Abel Alarcon</td>
+      <td><span class="role role-ops">Partner Ops</span></td>
+      <td>Availability schedule configuration (GoMeddo)</td>
+    </tr>
+    <tr>
+      <td>Jorge Enriquez</td>
+      <td><span class="role role-pm">Partner Engagement</span></td>
+      <td>Onboarding process and framework</td>
+    </tr>
+  </tbody>
+</table>
+</section>
+
+<!-- ================================================================ -->
+<!-- PLACEHOLDERS -->
+<!-- ================================================================ -->
+<section id="placeholders">
+<h2>Open items</h2>
+<p>The following items are pending input and marked with <span class="tbc">TBC</span> throughout this playbook. They do not block use of the playbook.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Owner/Source</th>
+      <th>Impact</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Updated technical questionnaire</td>
+      <td>Pramesh</td>
+      <td>Stage 5: link to current questionnaire</td>
+    </tr>
+    <tr>
+      <td>LMS forms for backup process and additional services</td>
+      <td>Loriana / Product</td>
+      <td>Stage 5: link to LMS forms</td>
+    </tr>
+    <tr>
+      <td>Photo guidelines</td>
+      <td>Repository / Content team</td>
+      <td>Stage 5: link to photo guidelines</td>
+    </tr>
+    <tr>
+      <td>Critical vs non-critical LIF fields</td>
+      <td>Juan + Content team</td>
+      <td>Stage 5 gate and Exception Type B: defines which fields can be missing</td>
+    </tr>
+    <tr>
+      <td>New vendor/partner risk email process</td>
+      <td>Juan</td>
+      <td>Stage 6: vendor code setup</td>
+    </tr>
+    <tr>
+      <td>Contact assignment SOP for Salesforce</td>
+      <td>Partner Ops</td>
+      <td>Stage 6 Phase 2: assigning outlet contacts before PCI form dispatch</td>
+    </tr>
+    <tr>
+      <td>Standard Salesforce comment formats</td>
+      <td>Juan</td>
+      <td>Communication protocol</td>
+    </tr>
+    <tr>
+      <td>Launch coordination details (go-live timing, marketing, signage, volume expectations)</td>
+      <td>Under development</td>
+      <td>Stage 7: launch coordination</td>
+    </tr>
+    <tr>
+      <td>Whether maximum group size can vary by outlet</td>
+      <td>Product (pending confirmation)</td>
+      <td>Pre-book onboarding form</td>
+    </tr>
+    <tr>
+      <td>Preferred format for availability schedule imports</td>
+      <td>Product (pending confirmation)</td>
+      <td>Pre-book configuration</td>
+    </tr>
+  </tbody>
+</table>
+</section>
+
+<!-- VERSION -->
+<section style="margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--mid-grey); font-size: 13px; color: var(--grey);">
+  <p><strong>Partner Onboarding Playbook V1.0</strong> | February 2026</p>
+  <p>Owner: Partner Engagement | Scope: Lounge and experience partners</p>
+  <p>Source documents: Partner Onboarding Process V1.5, PreBook Process Module V1.2, PreBook Definition V1.2, Partnership Lifecycle Framework V0.2</p>
+  <p style="margin-top: 8px;">This playbook consolidates the onboarding process for Stages 5, 6 and 7 of the partner lifecycle. It replaces the need to reference the source documents separately for day-to-day onboarding work.</p>
+</section>
+
+</main>
+</div>
+
+<script>
+// Tab switching
+function switchTab(group, path) {
+  const tabs = document.querySelectorAll(`.path-tabs[data-group="${group}"] .path-tab`);
+  tabs.forEach(t => t.classList.remove('active'));
+
+  const standardContent = document.getElementById(`${group}-standard`);
+  const prebookContent = document.getElementById(`${group}-prebook`);
+
+  if (path === 'standard') {
+    tabs[0].classList.add('active');
+    standardContent.classList.add('active');
+    prebookContent.classList.remove('active');
+  } else {
+    tabs[1].classList.add('active');
+    prebookContent.classList.add('active');
+    standardContent.classList.remove('active');
+  }
+}
+
+// Collapsible sections
+function toggleCollapsible(trigger) {
+  trigger.classList.toggle('open');
+  const body = trigger.nextElementSibling;
+  body.classList.toggle('open');
+}
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      const headerHeight = document.querySelector('.site-header').offsetHeight;
+      const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 16;
+      window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
